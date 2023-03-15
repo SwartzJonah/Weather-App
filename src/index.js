@@ -1,31 +1,8 @@
 const date = new Date();
 const dateOffset = date.getTimezoneOffset() * 60;
 const UTC = addSeconds(date, dateOffset);
-console.log(date)
-// timeconversion(dateUTC);
+let spacing = '\xa0\xa0\xa0\xa0\xa0';
 
-
-// function timeconversion(date){
-//     let dayOfWeek = date.slice(0,3);
-//     let month = date.slice(4,7);
-//     let actualDate = date.slice(8,10);
-//     let hours = date.slice(16,18);
-//     let hoursInt = parseInt(hours);
-//     let minutes = date.slice(19,21)
-//     let amPM = "";
-//     if(hoursInt > 12){
-//         amPM = "pm"
-//     } else {
-//         amPM = "am" 
-//     }
-    
-//     console.log(dayOfWeek);
-//     console.log(month);
-//     console.log(actualDate);
-//     console.log(hours);
-//     console.log(minutes);
-//     console.log(amPM);
-// }
 const searchForm = document.querySelector("#searchForm");
 
 searchForm.addEventListener("submit", (event) => {
@@ -41,13 +18,13 @@ async function getWeather(city) {
     const response = await
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + newcity + '&APPID=0aa2d1d8bde34a199d429347227fd53b');
     const data = await response.json();
-    console.log(data)
+
     const place = data.name;
-    console.log(place)
+
     const weatherName = data.weather[0].main;
-    console.log(weatherName)
+
     const weatherDescription = data.weather[0].description;
-    console.log(weatherDescription)
+
 
     const kelvinTemperature = data.main.temp;
     const kelvinMax = data.main.temp_max;
@@ -64,9 +41,7 @@ async function getWeather(city) {
 
 
     const timezone = data.timezone
-    
-    console.log(timezone)
-    console.log("dateUTCbefore:" + UTC);
+
     const humidity = data.main.humidity;
 
 
@@ -75,32 +50,75 @@ async function getWeather(city) {
         fahrenheitTemperature, fahrenheitMin, fahrenheitMax,
         timezone, humidity);
 
-    const blockdiv = document.createElement("div")
-    blockdiv.textContent = localWeather.time;
-    contentDiv.appendChild(blockdiv);
+    const blockDiv = document.createElement("div");
+    const locationDiv = document.createElement("div");
+    locationDiv.textContent = "Location: " + localWeather.location;
+    blockDiv.appendChild(locationDiv)
+    const timeDiv = document.createElement("div");
+    //switch to date thing
+    timeDiv.textContent = "Time: " + localWeather.time;
+    blockDiv.appendChild(timeDiv)
+    const weatherDiv = document.createElement("div");
+    weatherDiv.textContent = "Weather: " + localWeather.weather + spacing + " Subweather: " + localWeather.weatherDesc;
+    blockDiv.appendChild(weatherDiv)
+    const cTempDiv = document.createElement("div");
+    cTempDiv.textContent = "Temperature: " + localWeather.celcTemp + "°C" + spacing + "Max: " + localWeather.celcMax + "°C" + spacing + "Min: " + localWeather.celcMin + "°C";
+    blockDiv.appendChild(cTempDiv)
+    const fTempDiv = document.createElement("div");
+    fTempDiv.textContent = "Temperature: " + localWeather.fahTemp + "°F" + spacing + "Max: " + localWeather.fahMax + "°F" + spacing + "Min: " + localWeather.fahMin + "°F";
+    blockDiv.appendChild(fTempDiv)
+    const humidDiv = document.createElement("div");
+    humidDiv.textContent = "Humidity: " + localWeather.humid + "%";
+    blockDiv.appendChild(humidDiv)
+    contentDiv.appendChild(blockDiv);
     console.log(localWeather);
 
-    addSeconds(UTC, timezone*-1);
+    addSeconds(UTC, timezone * -1);
 }
 
 const locationFactory = (
     location,
     weather, weatherDesc,
     celcTemp, celcMin, celcMax,
-    fahrenheitTemp, fahMin, fahMax,
+    fahTemp, fahMin, fahMax,
     timezone, humid
 ) => {
     let time = addSeconds(UTC, timezone);
+    let brokenDate = time.toUTCString();
+    console.log(brokenDate)
+    let fullDate = dateFactory(brokenDate)
+    //send in full date
+    console.log(fullDate);
     return {
-        location, weather, weatherDesc, celcTemp, celcMin, celcMax, fahrenheitTemp, fahMin, fahMax,
+        location, weather, weatherDesc, celcTemp, celcMin, celcMax, fahTemp, fahMin, fahMax,
         time, humid
     }
 
 }
 
+const dateFactory = (date) => {
+    let dayOfWeek = date.slice(0,3);
+    let dayOfMonth = date.slice(5,7);
+    let month = date.slice(8,11);
+    let hours = date.slice(17,19);
+    console.log(hours)
+    let hoursInt = parseInt(hours);
+    let minutes = date.slice(20,22)
+    console.log(minutes)
+    let amPM = "";
+    if(hoursInt > 12){
+        hoursInt-12
+        amPM = "pm"
+    } else {
+        amPM = "am" 
+    }
+    let time = hoursInt + ":" + minutes + " " + amPM;
+    return {dayOfWeek, month, dayOfMonth, time}
+}
+
 function addSeconds(date, seconds) {
     date.setSeconds(date.getSeconds() + seconds);
-    console.log(date);
+    
     return date;
 }
 
