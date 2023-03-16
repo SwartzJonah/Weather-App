@@ -20,10 +20,11 @@ async function getWeather(city) {
     const contentDiv = document.querySelector("#content");
     const newcity = city.toString()
     console.log(newcity)
+    try{
     const response = await
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + newcity + '&APPID=0aa2d1d8bde34a199d429347227fd53b');
     const data = await response.json();
-
+    contentDiv.replaceChildren();   
     const place = data.name;
 
     const weatherName = data.weather[0].main;
@@ -39,16 +40,12 @@ async function getWeather(city) {
     const celsiusMax = changeToC(kelvinMax);
     const celsiusMin = changeToC(kelvinMin);
 
-
     const fahrenheitTemperature = changeToF(celsiusTemperature);
     const fahrenheitMax = changeToF(celsiusMax);
     const fahrenheitMin = changeToF(celsiusMin);
 
-
     const timezone = data.timezone
-
     const humidity = data.main.humidity;
-
 
     const localWeather = (0,_factories__WEBPACK_IMPORTED_MODULE_0__.locationFactory)(place, weatherName, weatherDescription,
         celsiusTemperature, celsiusMin, celsiusMax,
@@ -115,6 +112,11 @@ async function getWeather(city) {
     console.log(localWeather);
 
     addSeconds(UTC, timezone * -1);
+    } catch (error){
+        getWeather("New York");
+        alert("City does not exist");
+        
+    }
 }
 
 
@@ -245,7 +247,7 @@ const dateFactory = (date) => {
     let minutes = date.slice(19, 21)
     let amPM = "";
     if (hoursInt > 12) {
-        hoursInt - 12
+        hoursInt = hoursInt - 12;
         amPM = "pm"
     } else {
         amPM = "am"
@@ -335,6 +337,7 @@ searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
     let location = searchForm.elements['location'].value;
     (0,_modules_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)(location);
+    searchForm.elements['location'].value = "";
 })
 
 
@@ -344,7 +347,7 @@ function addSeconds(date, seconds) {
 }
 
 
-(0,_modules_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)("tokyo");
+(0,_modules_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)("New York");
 })();
 
 /******/ })()
