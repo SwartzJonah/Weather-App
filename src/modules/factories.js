@@ -97,7 +97,7 @@ export const dateFactory = (date) => {
     let minutes = date.slice(19, 21)
     let amPM = "";
     if (hoursInt > 12) {
-        hoursInt - 12
+        hoursInt = hoursInt - 12;
         amPM = "pm"
     } else {
         amPM = "am"

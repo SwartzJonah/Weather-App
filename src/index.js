@@ -10,6 +10,7 @@ searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
     let location = searchForm.elements['location'].value;
     getWeather(location);
+    searchForm.elements['location'].value = "";
 })
 
 
@@ -19,4 +20,4 @@ function addSeconds(date, seconds) {
 }
 
 
-getWeather("tokyo");
+getWeather("New York");
