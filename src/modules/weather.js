@@ -3,16 +3,7 @@ const dateOffset = date.getTimezoneOffset() * 60;
 const UTC = addSeconds(date, dateOffset);
 let spacing = '\xa0\xa0\xa0\xa0\xa0';
 
-const searchForm = document.querySelector("#searchForm");
-
-searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    let location = searchForm.elements['location'].value;
-    getWeather(location);
-})
-
-
-async function getWeather(city) {
+export async function getWeather(city) {
     const contentDiv = document.querySelector("#content");
     const newcity = city.toString()
     const response = await
@@ -215,18 +206,3 @@ function addSeconds(date, seconds) {
 
     return date;
 }
-
-
-function changeToC(temp) {
-    temp = temp - 273.5;
-    temp = Math.round(temp);
-    return temp;
-}
-
-function changeToF(temp) {
-    temp = (temp * 1.8) + 32;
-    temp = Math.round(temp);
-    return temp;
-}
-
-getWeather("tokyo");
