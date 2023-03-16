@@ -11,12 +11,10 @@ changeTempBtn.addEventListener("click", (event) => {
     if (active === "C") {
         fDiv.style.display = "table";
         cDiv.style.display = 'none';
-        console.log('C')
         active = "F"
     } else if (active === "F"){
         cDiv.style.display = "table";
         fDiv.style.display = 'none';
-        console.log('F')
         active = "C"
     }
 })
