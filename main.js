@@ -1,22 +1,25 @@
 /******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ([
+/* 0 */,
+/* 1 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getWeather": () => (/* binding */ getWeather)
+/* harmony export */ });
+/* harmony import */ var _factories__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+
 const date = new Date();
 const dateOffset = date.getTimezoneOffset() * 60;
 const UTC = addSeconds(date, dateOffset);
 let spacing = '\xa0\xa0\xa0\xa0\xa0';
 
-const searchForm = document.querySelector("#searchForm");
-
-searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    let location = searchForm.elements['location'].value;
-    getWeather(location);
-})
-
-
 async function getWeather(city) {
     const contentDiv = document.querySelector("#content");
     const newcity = city.toString()
+    console.log(newcity)
     const response = await
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + newcity + '&APPID=0aa2d1d8bde34a199d429347227fd53b');
     const data = await response.json();
@@ -47,7 +50,7 @@ async function getWeather(city) {
     const humidity = data.main.humidity;
 
 
-    const localWeather = locationFactory(place, weatherName, weatherDescription,
+    const localWeather = (0,_factories__WEBPACK_IMPORTED_MODULE_0__.locationFactory)(place, weatherName, weatherDescription,
         celsiusTemperature, celsiusMin, celsiusMax,
         fahrenheitTemperature, fahrenheitMin, fahrenheitMax,
         timezone, humidity);
@@ -83,7 +86,7 @@ async function getWeather(city) {
     cMainDiv.textContent = "Temperature: " + localWeather.celcTemp + "°C";
     cTempDiv.appendChild(cMainDiv);
 
-    cSubDiv = document.createElement("div")
+    const cSubDiv = document.createElement("div")
     cSubDiv.classList.add("cSubDiv")
     cSubDiv.textContent = "Max: " + localWeather.celcMax + "°C" + spacing + "Min: " + localWeather.celcMin + "°C";
     cTempDiv.appendChild(cSubDiv);
@@ -97,7 +100,7 @@ async function getWeather(city) {
     fMainDiv.textContent = "Temperature: " + localWeather.fahTemp + "°F";
     fTempDiv.appendChild(fMainDiv);
 
-    fSubDiv = document.createElement("div")
+    const fSubDiv = document.createElement("div")
     fSubDiv.classList.add("fSubDiv")
     fSubDiv.textContent = "Max: " + localWeather.fahMax + "°F" + spacing + "Min: " + localWeather.fahMin + "°F";
     fTempDiv.appendChild(fSubDiv);
@@ -114,6 +117,43 @@ async function getWeather(city) {
     addSeconds(UTC, timezone * -1);
 }
 
+
+function addSeconds(date, seconds) {
+    date.setSeconds(date.getSeconds() + seconds);
+
+    return date;
+}
+
+function changeToC(temp) {
+    temp = temp - 273.5;
+    temp = Math.round(temp);
+    return temp;
+}
+
+function changeToF(temp) {
+    temp = (temp * 1.8) + 32;
+    temp = Math.round(temp);
+    return temp;
+}
+
+/***/ }),
+/* 2 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dateFactory": () => (/* binding */ dateFactory),
+/* harmony export */   "getUTC": () => (/* binding */ getUTC),
+/* harmony export */   "locationFactory": () => (/* binding */ locationFactory)
+/* harmony export */ });
+function getUTC(){
+    const date = new Date();
+    const dateOffset = date.getTimezoneOffset() * 60;
+    const UTC = addSeconds(date, dateOffset);
+    
+    return UTC;
+}
+
 const locationFactory = (
     location,
     weather, weatherDesc,
@@ -121,9 +161,12 @@ const locationFactory = (
     fahTemp, fahMin, fahMax,
     timezone, humid
 ) => {
+    const UTC = getUTC();
+    
     let time = addSeconds(UTC, timezone);
-    let brokenDate = time.toUTCString();
-    console.log(brokenDate)
+    ;
+    let brokenDate = time.toString();
+    
     let fullDate = dateFactory(brokenDate)
     //send in full date
     console.log(fullDate);
@@ -135,6 +178,7 @@ const locationFactory = (
 }
 
 const dateFactory = (date) => {
+    console.log(date)
     let dayOfWeek = date.slice(0, 3);
     switch (dayOfWeek) {
         case "Mon":
@@ -159,8 +203,8 @@ const dateFactory = (date) => {
             dayOfWeek = "Sunday"
             break;
     }
-    let dayOfMonth = date.slice(5, 7);
-    let month = date.slice(8, 11);
+    let dayOfMonth = date.slice(8, 10);
+    let month = date.slice(4, 7);
     switch (month) {
         case "Jan":
             month = "January"
@@ -196,11 +240,9 @@ const dateFactory = (date) => {
             month = "December"
             break;
     }
-    let hours = date.slice(17, 19);
-    console.log(hours)
+    let hours = date.slice(16, 18);
     let hoursInt = parseInt(hours);
-    let minutes = date.slice(20, 22)
-    console.log(minutes)
+    let minutes = date.slice(19, 21)
     let amPM = "";
     if (hoursInt > 12) {
         hoursInt - 12
@@ -213,24 +255,97 @@ const dateFactory = (date) => {
 }
 
 function addSeconds(date, seconds) {
+    
     date.setSeconds(date.getSeconds() + seconds);
 
     return date;
 }
 
+/***/ })
+/******/ 	]);
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_weather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
-function changeToC(temp) {
-    temp = temp - 273.5;
-    temp = Math.round(temp);
-    return temp;
+const date = new Date();
+const dateOffset = date.getTimezoneOffset() * 60;
+const UTC = addSeconds(date, dateOffset);
+let spacing = '\xa0\xa0\xa0\xa0\xa0';
+
+const searchForm = document.querySelector("#searchForm");
+
+searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    let location = searchForm.elements['location'].value;
+    (0,_modules_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)(location);
+})
+
+
+function addSeconds(date, seconds) {
+    date.setSeconds(date.getSeconds() + seconds);
+    return date;
 }
 
-function changeToF(temp) {
-    temp = (temp * 1.8) + 32;
-    temp = Math.round(temp);
-    return temp;
-}
 
-getWeather("tokyo");
+(0,_modules_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)("tokyo");
+})();
+
 /******/ })()
 ;
