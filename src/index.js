@@ -1,10 +1,25 @@
 import { getWeather } from "./modules/weather";
-const date = new Date();
-const dateOffset = date.getTimezoneOffset() * 60;
-const UTC = addSeconds(date, dateOffset);
-let spacing = '\xa0\xa0\xa0\xa0\xa0';
 
 const searchForm = document.querySelector("#searchForm");
+const changeTempBtn = document.querySelector("#changeTempBtn");
+let active = "C";
+
+changeTempBtn.addEventListener("click", (event) => {
+    const fDiv = document.querySelector(".fTempDiv");
+    const cDiv = document.querySelector(".cTempDiv");
+    event.preventDefault();
+    if (active === "C") {
+        fDiv.style.display = "table";
+        cDiv.style.display = 'none';
+        console.log('C')
+        active = "F"
+    } else if (active === "F"){
+        cDiv.style.display = "table";
+        fDiv.style.display = 'none';
+        console.log('F')
+        active = "C"
+    }
+})
 
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -13,11 +28,6 @@ searchForm.addEventListener("submit", (event) => {
     searchForm.elements['location'].value = "";
 })
 
-
-function addSeconds(date, seconds) {
-    date.setSeconds(date.getSeconds() + seconds);
-    return date;
-}
 
 
 getWeather("New York");

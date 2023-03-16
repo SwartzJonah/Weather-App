@@ -1,0 +1,92 @@
+body {
+    overflow-x: hidden;
+    background-color: aqua;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#changeTempBtn{
+background: yellow;
+}
+
+/* form style */
+#formDiv{
+margin-left: 50px;
+}
+
+input{
+    background-color: green;
+}
+
+#submitBtn{
+    background-color: blueviolet;
+}
+
+/* Content Style */
+#content{
+    
+}
+
+.blockDiv{
+    background-color: red;
+}
+
+.blockOneDiv{
+
+}
+.locationDiv{
+
+}
+
+.timeDiv{
+
+}
+
+.dateDiv{
+
+}
+
+.blockTwoDiv{
+
+}
+
+.weatherDiv{
+
+}
+
+.weatherDescDiv{
+
+}
+
+.humidDiv{
+
+}
+
+.blockThreeDiv{
+
+}
+
+/* celsius temp imposed over fahrenhiet temp */
+.cTempDiv{
+
+}
+
+.cMainDiv{
+
+}
+
+.cSubDiv{
+
+}
+
+.fTempDiv{
+    display: none;
+}
+
+.fMainDiv{
+
+}
+
+.fSubDiv{
+
+}

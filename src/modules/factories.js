@@ -1,8 +1,8 @@
-export function getUTC(){
+export function getUTC() {
     const date = new Date();
     const dateOffset = date.getTimezoneOffset() * 60;
     const UTC = addSeconds(date, dateOffset);
-    
+
     return UTC;
 }
 
@@ -14,11 +14,11 @@ export const locationFactory = (
     timezone, humid
 ) => {
     const UTC = getUTC();
-    
+
     let time = addSeconds(UTC, timezone);
     ;
     let brokenDate = time.toString();
-    
+
     let fullDate = dateFactory(brokenDate)
     //send in full date
     console.log(fullDate);
@@ -107,7 +107,7 @@ export const dateFactory = (date) => {
 }
 
 function addSeconds(date, seconds) {
-    
+
     date.setSeconds(date.getSeconds() + seconds);
 
     return date;
