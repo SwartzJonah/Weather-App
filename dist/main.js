@@ -78,6 +78,8 @@ async function getWeather(city) {
         blockDiv.appendChild(blockOneDiv)
 
         //block two div is weather and humidity
+        const secondLayerDiv = document.createElement("div");
+        secondLayerDiv.classList.add("secondLayerDiv")
 
         const blockTwoDiv = document.createElement("div");
         blockTwoDiv.classList.add("blockTwoDiv")
@@ -97,7 +99,7 @@ async function getWeather(city) {
         humidDiv.textContent = "Humidity: " + localWeather.humid + "%";
         blockTwoDiv.appendChild(humidDiv)
 
-        blockDiv.appendChild(blockTwoDiv)
+        secondLayerDiv.appendChild(blockTwoDiv)
 
         //block three is the temperatures
 
@@ -133,7 +135,9 @@ async function getWeather(city) {
         fTempDiv.appendChild(fSubDiv);
     
         blockThreeDiv.appendChild(fTempDiv)
-        blockDiv.appendChild(blockThreeDiv)
+        secondLayerDiv.appendChild(blockThreeDiv)
+
+        blockDiv.appendChild(secondLayerDiv)
 
 
         contentDiv.appendChild(blockDiv);

@@ -3,90 +3,83 @@ body {
     background-color: aqua;
     margin: 0;
     font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: column;
 }
 
-#changeTempBtn{
-background: yellow;
+#changeTempBtn {
+    background: yellow;
+    height: min-content;
+}
+
+#header {
+    display: flex;
+    justify-content: flex-end;
+    height: 30vh;
 }
 
 /* form style */
-#formDiv{
-margin-left: 50px;
+#formDiv {
+    margin-left: 10px;
 }
 
-input{
-    background-color: green;
+input {
+    margin: 0;
 }
 
-#submitBtn{
+#submitBtn {
     background-color: blueviolet;
 }
 
 /* Content Style */
-#content{
-    
+#content {
+
 }
 
-.blockDiv{
+.blockDiv {
     background-color: red;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10vw;
 }
 
-.blockOneDiv{
-
+.blockOneDiv {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
-.locationDiv{
+.locationDiv {}
 
-}
+.timeDiv {}
 
-.timeDiv{
+.dateDiv {}
 
-}
-
-.dateDiv{
-
-}
-
-.blockTwoDiv{
-
+.secondLayerDiv {
+    display: flex;
+    justify-content: space-evenly
 }
 
-.weatherDiv{
+.blockTwoDiv {}
 
-}
+.weatherDiv {}
 
-.weatherDescDiv{
+.weatherDescDiv {}
 
-}
+.humidDiv {}
 
-.humidDiv{
-
-}
-
-.blockThreeDiv{
-
-}
+.blockThreeDiv {}
 
 /* celsius temp imposed over fahrenhiet temp */
-.cTempDiv{
+.cTempDiv {}
 
-}
+.cMainDiv {}
 
-.cMainDiv{
+.cSubDiv {}
 
-}
-
-.cSubDiv{
-
-}
-
-.fTempDiv{
+.fTempDiv {
     display: none;
 }
 
-.fMainDiv{
+.fMainDiv {}
 
-}
-
-.fSubDiv{
-
-}
+.fSubDiv {}
