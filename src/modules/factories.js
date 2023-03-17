@@ -13,6 +13,12 @@ export const locationFactory = (
     fahTemp, fahMin, fahMax,
     timezone, humid
 ) => {
+    let tempWord = weatherDesc;
+    let tempLetter = tempWord.charAt(0).toUpperCase();
+    let remains = tempWord.slice(1);
+    weatherDesc =  tempLetter + remains;
+
+
     const UTC = getUTC();
 
     let time = addSeconds(UTC, timezone);

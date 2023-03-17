@@ -50,17 +50,17 @@ export async function getWeather(city) {
 
         const locationDiv = document.createElement("div");
         locationDiv.classList.add("locationDiv")
-        locationDiv.textContent = "Location: " + localWeather.location;
+        locationDiv.textContent = localWeather.location;
         blockOneDiv.appendChild(locationDiv)
 
         const timeDiv = document.createElement("div");
         timeDiv.classList.add("timeDiv")
-        timeDiv.textContent = "Time: " + localWeather.fullDate.time;
+        timeDiv.textContent = localWeather.fullDate.time;
         blockOneDiv.appendChild(timeDiv);
 
         const dateDiv = document.createElement("div");
         dateDiv.classList.add("dateDiv")
-        dateDiv.textContent = "Date: " + localWeather.fullDate.dayOfWeek + ", " + localWeather.fullDate.month + " " + localWeather.fullDate.dayOfMonth;
+        dateDiv.textContent = localWeather.fullDate.dayOfWeek + ", " + localWeather.fullDate.month + " " + localWeather.fullDate.dayOfMonth;
         blockOneDiv.appendChild(dateDiv)
 
         blockDiv.appendChild(blockOneDiv)
@@ -74,12 +74,12 @@ export async function getWeather(city) {
 
         const weatherDiv = document.createElement("div");
         weatherDiv.classList.add("weatherDiv")
-        weatherDiv.textContent = "Weather: " + localWeather.weather;
+        weatherDiv.textContent = localWeather.weather;
         blockTwoDiv.appendChild(weatherDiv)
 
         const weatherDescDiv = document.createElement("div");
         weatherDescDiv.classList.add("weatherDescDiv")
-        weatherDescDiv.textContent = "Subweather: " + localWeather.weatherDesc;
+        weatherDescDiv.textContent = localWeather.weatherDesc;
         blockTwoDiv.appendChild(weatherDescDiv)
 
         const humidDiv = document.createElement("div");
@@ -99,12 +99,12 @@ export async function getWeather(city) {
 
         const cMainDiv = document.createElement("div")
         cMainDiv.classList.add("cMainDiv")
-        cMainDiv.textContent = "Temperature: " + localWeather.celcTemp + "°C";
+        cMainDiv.textContent = localWeather.celcTemp + "°C";
         cTempDiv.appendChild(cMainDiv);
 
         const cSubDiv = document.createElement("div")
         cSubDiv.classList.add("cSubDiv")
-        cSubDiv.textContent = "Max: " + localWeather.celcMax + "°C" + spacing + "Min: " + localWeather.celcMin + "°C";
+        cSubDiv.textContent = "Max:" + localWeather.celcMax + "°C" + spacing + "Min:" + localWeather.celcMin + "°C";
         cTempDiv.appendChild(cSubDiv);
         blockThreeDiv.appendChild(cTempDiv)
         
@@ -114,12 +114,12 @@ export async function getWeather(city) {
 
         const fMainDiv = document.createElement("div")
         fMainDiv.classList.add("fMainDiv")
-        fMainDiv.textContent = "Temperature: " + localWeather.fahTemp + "°F";
+        fMainDiv.textContent = localWeather.fahTemp + "°F";
         fTempDiv.appendChild(fMainDiv);
 
         const fSubDiv = document.createElement("div")
         fSubDiv.classList.add("fSubDiv")
-        fSubDiv.textContent = "Max: " + localWeather.fahMax + "°F" + spacing + "Min: " + localWeather.fahMin + "°F";
+        fSubDiv.textContent = "Max:" + localWeather.fahMax + "°F" + spacing + "Min:" + localWeather.fahMin + "°F";
         fTempDiv.appendChild(fSubDiv);
     
         blockThreeDiv.appendChild(fTempDiv)
