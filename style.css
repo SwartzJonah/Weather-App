@@ -92,7 +92,7 @@ input {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display: flex;
     flex-direction: column;
-    color:white;
+    
 }
 
 .weatherDiv {
@@ -128,7 +128,7 @@ input {
 }
 
 .cSubDiv {
-    color:whitesmoke;
+    
     font-size: 25px;
     font-weight: bold;
 }
@@ -147,7 +147,7 @@ input {
 
 .fSubDiv {
     font-size: 25px;
-    color:whitesmoke;
+    
     font-weight: bold;
 }
 
